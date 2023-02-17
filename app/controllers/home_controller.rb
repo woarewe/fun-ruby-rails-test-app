@@ -1,9 +1,14 @@
 class HomeController < ApplicationController
+  include F.import
+
   def index
-    render json: {
+    sum = f("math.sum").(1, 2)
+    response = f("json.prepare").(
       data: {
-        status: 'ok'
+        status: 'ok',
+        sum: sum
       }
-    }
+    )
+    render json: response
   end
 end
